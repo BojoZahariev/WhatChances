@@ -1,3 +1,5 @@
+let chance = document.querySelector('#chance');
+
 const endpoint =
   'https://api.coronavirus.data.gov.uk/v1/data?' + 'filters=areaType=nation;areaName=england&' + 'structure={"date":"date","newCases":"newCasesByPublishDate"}';
 
@@ -12,7 +14,8 @@ const getData = async url => {
 const main = async () => {
   const result = await getData(endpoint);
 
-  console.log(result);
+  console.log(result.data[0]);
+  chance.textContent = ((result.data[0].newCases / 56000000) * 100).toFixed(2);
 }; // main
 
 main().catch(err => {
